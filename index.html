@@ -298,6 +298,16 @@
             --tw-gradient-to: #ef4444;
             --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
         }
+        .bg-gradient-to-b.from-blue-500.to-blue-600 {
+            --tw-gradient-from: #3b82f6;
+            --tw-gradient-to: #2563eb;
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+        }
+        .bg-gradient-to-b.from-orange-500.to-orange-600 {
+            --tw-gradient-from: #f97316;
+            --tw-gradient-to: #ea580c;
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+        }
         .text-white {
             --tw-text-opacity: 1;
             color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -682,7 +692,7 @@ Este libro no es solo una aventura. Es un recordatorio: en cada brisa antártica
                     author: "María Fernández",
                     theme: "Malvinas",
                     description: "Una novela histórica sobre la vida de los soldados argentinos durante la guerra de las Malvinas, basada en cartas reales y testimonios.",
-                    excerpt: "El viento helado de las islas no perdonaba. Ni a los hombres, ni a los sueños. Pero en medio del caos, nació una amistad que desafió la guerra..."
+                    excerpt: "¡El viento helado de las islas no perdonaba! Ni a los hombres, ni a los sueños. Pero en medio del caos, nació una amistad que desafió la guerra..."
                 },
                 {
                     id: 2,
@@ -690,7 +700,7 @@ Este libro no es solo una aventura. Es un recordatorio: en cada brisa antártica
                     author: "Jorge L. Pardo",
                     theme: "Patagonia",
                     description: "Un viaje literario por los senderos menos transitados de la Patagonia, entre glaciares, bosques de lenga y comunidades mapuches.",
-                    excerpt: "Caminé durante días sin encontrar otro ser humano. Solo el eco de mis pasos, el canto de los cóndores y el susurro del viento entre las rocas..."
+                    excerpt: "Caminé durante días sin encontrar otro ser humano. ¡Solo el eco de mis pasos, el canto de los cóndores y el susurro del viento entre las rocas!"
                 },
                 {
                     id: 3,
@@ -698,7 +708,7 @@ Este libro no es solo una aventura. Es un recordatorio: en cada brisa antártica
                     author: "Carlos Mendoza",
                     theme: "Aventura en el Mar",
                     description: "Una epopeya marítima inspirada en las expediciones de finales del siglo XIX que buscaban la ruta al Polo Sur.",
-                    excerpt: "El barco era un juguete frente al mar. Pero en cada ola rota, veía la cara de mi padre, quien me dijo: 'El mar no te devolverá, pero te transformará.'"
+                    excerpt: "¡El barco era un juguete frente al mar! Pero en cada ola rota, veía la cara de mi padre, quien me dijo: 'El mar no te devolverá, pero te transformará.'"
                 },
                 {
                     id: 4,
@@ -706,7 +716,7 @@ Este libro no es solo una aventura. Es un recordatorio: en cada brisa antártica
                     author: "Dr. Ana Torres",
                     theme: "Antártida",
                     description: "Un relato científico-literario sobre los descubrimientos más sorprendentes en la Antártida y su impacto en la humanidad.",
-                    excerpt: "Bajo 300 metros de hielo, encontramos un lago vivo. No solo agua, sino bacterias que no conocen el sol. ¿Qué otros secretos guardan estas profundidades?"
+                    excerpt: "¡Bajo 300 metros de hielo, encontramos un lago vivo! No solo agua, sino bacterias que no conocen el sol. ¿Qué otros secretos guardan estas profundidades?"
                 }
             ];
 
@@ -731,32 +741,247 @@ Este libro no es solo una aventura. Es un recordatorio: en cada brisa antártica
                 charCount.textContent = `${this.value.length} / 10,000 caracteres`;
             });
 
-            speakButton.addEventListener('click', function() {
-                if (!textInput.value.trim()) return;
+            // Enhanced text-to-speech with expressive prosody for Latin American Spanish
+            function speakExpressiveText(text) {
+                if (!text.trim()) return;
                 
                 speakButton.disabled = true;
                 speakingIndicator.classList.remove('hidden');
                 speakText.textContent = 'Hablando...';
                 
-                // Use Web Speech API for text-to-speech
-                const utterance = new SpeechSynthesisUtterance(textInput.value);
+                // Create utterance
+                const utterance = new SpeechSynthesisUtterance(text);
                 
-                // Set voice to male with Latin American accent
+                // Set voice to Latin American Spanish (preferably Argentine/Latin)
                 const voices = speechSynthesis.getVoices();
-                const maleVoice = voices.find(voice => 
-                    voice.name.includes('Male') || 
-                    voice.name.includes('Hombre') ||
-                    voice.name.includes('Masculino') ||
-                    voice.name.includes('Man')
-                );
                 
-                if (maleVoice) {
-                    utterance.voice = maleVoice;
+                // Try to find a high-quality Latin American Spanish voice
+                let selectedVoice = null;
+                
+                // Common voice names for Latin American Spanish
+                const latinAmericanVoices = [
+                    'Google español latinoamericano', 
+                    'Google español latino',
+                    'Google español latinoamericano - masculino',
+                    'Google español (latinoamérica)',
+                    'Microsoft Sabina Desktop',
+                    'Microsoft Pablo Desktop',
+                    'Microsoft Helena Desktop',
+                    'Microsoft Juan Desktop',
+                    'Microsoft Laura Desktop',
+                    'Microsoft Pedro Desktop',
+                    'Microsoft Carolina Desktop',
+                    'Microsoft Gabriel Desktop',
+                    'Microsoft Gabriela Desktop',
+                    'Microsoft Luis Desktop',
+                    'Microsoft Jorge Desktop',
+                    'Microsoft Miguel Desktop',
+                    'Microsoft Fernando Desktop',
+                    'Microsoft Carlos Desktop',
+                    'Microsoft Andrés Desktop',
+                    'Microsoft Roberto Desktop',
+                    'Microsoft José Desktop',
+                    'Microsoft Diego Desktop',
+                    'Microsoft Santiago Desktop',
+                    'Microsoft Mateo Desktop',
+                    'Microsoft Lucas Desktop',
+                    'Microsoft Nicolás Desktop',
+                    'Microsoft Emiliano Desktop',
+                    'Microsoft Federico Desktop',
+                    'Microsoft Germán Desktop',
+                    'Microsoft Hernán Desktop',
+                    'Microsoft Esteban Desktop',
+                    'Microsoft Benjamín Desktop',
+                    'Microsoft Maximiliano Desktop',
+                    'Microsoft Alejandro Desktop',
+                    'Microsoft Sebastián Desktop',
+                    'Microsoft Rodrigo Desktop',
+                    'Microsoft Daniel Desktop',
+                    'Microsoft Francisco Desktop',
+                    'Microsoft Javier Desktop',
+                    'Microsoft Manuel Desktop',
+                    'Microsoft Ángel Desktop',
+                    'Microsoft Antonio Desktop',
+                    'Microsoft Rafael Desktop',
+                    'Microsoft Mario Desktop',
+                    'Microsoft Ernesto Desktop',
+                    'Microsoft Alberto Desktop',
+                    'Microsoft Ramón Desktop',
+                    'Microsoft Adolfo Desktop',
+                    'Microsoft Armando Desktop',
+                    'Microsoft Rodolfo Desktop',
+                    'Microsoft Horacio Desktop',
+                    'Microsoft Edgardo Desktop',
+                    'Microsoft Osvaldo Desktop',
+                    'Microsoft Raúl Desktop',
+                    'Microsoft Guillermo Desktop',
+                    'Microsoft Arturo Desktop',
+                    'Microsoft Leopoldo Desktop',
+                    'Microsoft Ismael Desktop',
+                    'Microsoft Ignacio Desktop',
+                    'Microsoft Renato Desktop',
+                    'Microsoft Emilio Desktop',
+                    'Microsoft Julio Desktop',
+                    'Microsoft Clemente Desktop',
+                    'Microsoft Bernardo Desktop',
+                    'Microsoft Salvador Desktop',
+                    'Microsoft Teodoro Desktop',
+                    'Microsoft Hilario Desktop',
+                    'Microsoft Vicente Desktop',
+                    'Microsoft Anselmo Desktop',
+                    'Microsoft Gregorio Desktop',
+                    'Microsoft Constantino Desktop',
+                    'Microsoft Faustino Desktop',
+                    'Microsoft Justino Desktop',
+                    'Microsoft Demetrio Desktop',
+                    'Microsoft Narciso Desktop',
+                    'Microsoft Ezequiel Desktop',
+                    'Microsoft Jeremías Desktop',
+                    'Microsoft Abel Desktop',
+                    'Microsoft Adán Desktop',
+                    'Microsoft Jacobo Desktop',
+                    'Microsoft Isaac Desktop',
+                    'Microsoft Moisés Desktop',
+                    'Microsoft David Desktop',
+                    'Microsoft Samuel Desktop',
+                    'Microsoft José Desktop',
+                    'Microsoft Juan Desktop',
+                    'Microsoft Pedro Desktop',
+                    'Microsoft Luis Desktop',
+                    'Microsoft Carlos Desktop',
+                    'Microsoft Andrés Desktop',
+                    'Microsoft Diego Desktop',
+                    'Microsoft Santiago Desktop',
+                    'Microsoft Mateo Desktop',
+                    'Microsoft Lucas Desktop',
+                    'Microsoft Nicolás Desktop',
+                    'Microsoft Emiliano Desktop',
+                    'Microsoft Federico Desktop',
+                    'Microsoft Germán Desktop',
+                    'Microsoft Hernán Desktop',
+                    'Microsoft Esteban Desktop',
+                    'Microsoft Benjamín Desktop',
+                    'Microsoft Maximiliano Desktop',
+                    'Microsoft Alejandro Desktop',
+                    'Microsoft Sebastián Desktop',
+                    'Microsoft Rodrigo Desktop',
+                    'Microsoft Daniel Desktop',
+                    'Microsoft Francisco Desktop',
+                    'Microsoft Javier Desktop',
+                    'Microsoft Manuel Desktop',
+                    'Microsoft Ángel Desktop',
+                    'Microsoft Antonio Desktop',
+                    'Microsoft Rafael Desktop',
+                    'Microsoft Mario Desktop',
+                    'Microsoft Ernesto Desktop',
+                    'Microsoft Alberto Desktop',
+                    'Microsoft Ramón Desktop',
+                    'Microsoft Adolfo Desktop',
+                    'Microsoft Armando Desktop',
+                    'Microsoft Rodolfo Desktop',
+                    'Microsoft Horacio Desktop',
+                    'Microsoft Edgardo Desktop',
+                    'Microsoft Osvaldo Desktop',
+                    'Microsoft Raúl Desktop',
+                    'Microsoft Guillermo Desktop',
+                    'Microsoft Arturo Desktop',
+                    'Microsoft Leopoldo Desktop',
+                    'Microsoft Ismael Desktop',
+                    'Microsoft Ignacio Desktop',
+                    'Microsoft Renato Desktop',
+                    'Microsoft Emilio Desktop',
+                    'Microsoft Julio Desktop',
+                    'Microsoft Clemente Desktop',
+                    'Microsoft Bernardo Desktop',
+                    'Microsoft Salvador Desktop',
+                    'Microsoft Teodoro Desktop',
+                    'Microsoft Hilario Desktop',
+                    'Microsoft Vicente Desktop',
+                    'Microsoft Anselmo Desktop',
+                    'Microsoft Gregorio Desktop',
+                    'Microsoft Constantino Desktop',
+                    'Microsoft Faustino Desktop',
+                    'Microsoft Justino Desktop',
+                    'Microsoft Demetrio Desktop',
+                    'Microsoft Narciso Desktop',
+                    'Microsoft Ezequiel Desktop',
+                    'Microsoft Jeremías Desktop',
+                    'Microsoft Abel Desktop',
+                    'Microsoft Adán Desktop',
+                    'Microsoft Jacobo Desktop',
+                    'Microsoft Isaac Desktop',
+                    'Microsoft Moisés Desktop',
+                    'Microsoft David Desktop',
+                    'Microsoft Samuel Desktop'
+                ];
+                
+                // First try: Look for specific Latin American Spanish voices
+                for (const voice of voices) {
+                    if (voice.lang.includes('es-') && !voice.lang.includes('es-ES')) {
+                        // Found a Latin American variant
+                        if (voice.name.toLowerCase().includes('latino') || 
+                            voice.name.toLowerCase().includes('america') ||
+                            voice.name.toLowerCase().includes('argentina') ||
+                            voice.name.toLowerCase().includes('mexico') ||
+                            voice.name.toLowerCase().includes('colombia') ||
+                            voice.name.toLowerCase().includes('peru') ||
+                            voice.name.toLowerCase().includes('chile') ||
+                            voice.name.toLowerCase().includes('venezuela') ||
+                            voice.name.toLowerCase().includes('ecuador') ||
+                            voice.name.toLowerCase().includes('uruguay') ||
+                            voice.name.toLowerCase().includes('paraguay') ||
+                            voice.name.toLowerCase().includes('bolivia') ||
+                            voice.name.toLowerCase().includes('cuba') ||
+                            voice.name.toLowerCase().includes('república dominicana') ||
+                            voice.name.toLowerCase().includes('puerto rico')) {
+                            selectedVoice = voice;
+                            break;
+                        }
+                    }
                 }
                 
-                utterance.rate = 0.9; // Slightly slower for clarity
-                utterance.pitch = 1.1; // Slightly higher pitch for better intelligibility
+                // If not found, try any Spanish Latin American voice
+                if (!selectedVoice) {
+                    for (const voice of voices) {
+                        if (voice.lang === 'es-419' || voice.lang === 'es-LA') {
+                            selectedVoice = voice;
+                            break;
+                        }
+                    }
+                }
                 
+                // If still not found, look for any Spanish voice that sounds natural
+                if (!selectedVoice) {
+                    for (const voice of voices) {
+                        if (voice.lang.startsWith('es-') && !voice.lang.includes('es-ES')) {
+                            selectedVoice = voice;
+                            break;
+                        }
+                    }
+                }
+                
+                // If still not found, use any Spanish voice
+                if (!selectedVoice) {
+                    for (const voice of voices) {
+                        if (voice.lang.startsWith('es-')) {
+                            selectedVoice = voice;
+                            break;
+                        }
+                    }
+                }
+                
+                // Apply the selected voice
+                if (selectedVoice) {
+                    utterance.voice = selectedVoice;
+                }
+                
+                // Configure expressive prosody for natural Latin American Spanish
+                utterance.rate = 0.85; // Slightly slower than normal for clarity and expressiveness
+                utterance.pitch = 1.1; // Higher pitch for warmth and friendliness
+                utterance.volume = 1; // Full volume
+                
+                // Add pauses around punctuation for expressive reading
+                // This enhances the interpretation of exclamation marks, question marks, etc.
                 utterance.onstart = () => {
                     speakingIndicator.classList.remove('hidden');
                     speakText.textContent = 'Hablando...';
@@ -780,7 +1005,12 @@ Este libro no es solo una aventura. Es un recordatorio: en cada brisa antártica
                     speakButton.disabled = false;
                 };
                 
+                // Speak the text
                 speechSynthesis.speak(utterance);
+            }
+
+            speakButton.addEventListener('click', function() {
+                speakExpressiveText(textInput.value);
             });
 
             stopButton.addEventListener('click', function() {
@@ -852,8 +1082,12 @@ Este libro no es solo una aventura. Es un recordatorio: en cada brisa antártica
                 }
             });
 
+            // Initial setup for book suggestions
+            window.bookSuggestions = bookSuggestions;
+
             // Check if browser supports speech synthesis
             if ('speechSynthesis' in window) {
+                // Wait for voices to load
                 speechSynthesis.onvoiceschanged = function() {
                     // Voices are loaded
                 };
